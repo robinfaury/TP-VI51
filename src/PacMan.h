@@ -3,14 +3,14 @@
 
 #include "Semantic.h"
 
-class BasicAgent : public Semantic
+class PacMan : public Semantic
 {
 private:
 
 public:
-	BasicAgent(void);
+	PacMan(void);
 
-	~BasicAgent(void);
+	~PacMan(void);
 };
 
 #endif

@@ -9,8 +9,8 @@ class PhysicalObject
 {
 protected:
 	Semantic type;
-	float posX;
-	float posY;
+	int posX;
+	int posY;
 
 	PhysicalObject(void) {}
 

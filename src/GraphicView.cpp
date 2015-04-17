@@ -7,8 +7,18 @@ GraphicView::GraphicView(void)
 
 void GraphicView::Init(int height, int width)
 {
-	this->window = new sf::RenderWindow(sf::VideoMode(height, width), "VI51 - Simulator of Lemming");
+	this->window = new sf::RenderWindow(sf::VideoMode(height, width), "VI51 - PacMan");
 	this->window->setVerticalSyncEnabled(true);
+
+	this->wallTexture.loadFromFile("../TP-VI51/res/wall.png");
+	this->sprite.push_back(sf::Sprite());
+	this->sprite[this->sprite.size()-1].setTexture(this->wallTexture);
+	this->pillTexture.loadFromFile("../TP-VI51/res/pill.png");
+	this->sprite.push_back(sf::Sprite());
+	this->sprite[this->sprite.size()-1].setTexture(this->pillTexture);
+	this->playerTexture.loadFromFile("../TP-VI51/res/player.png");
+	this->sprite.push_back(sf::Sprite());
+	this->sprite[this->sprite.size()-1].setTexture(this->playerTexture);
 }
 
 int GraphicView::CheckEvent()
@@ -45,6 +55,18 @@ void GraphicView::Draw()
 		std::vector<float> pos = listOfBodys->at(idCurrentBody)->GetPosition();
 		this->bodyShape[idCurrentBody].setPosition(pos[0], pos[1]);
 		window->draw(this->bodyShape[idCurrentBody]);
+	}
+
+	int** map = this->world->GetMap();
+	for (int i=0; i<this->world->getHeight(); ++i)
+	{
+		for (int j=0; j<this->world->getWidth(); ++j)
+		{
+			if (map[i][j] == 0)
+				continue;
+			this->sprite[map[i][j]-1].setPosition(i*this->wallTexture.getSize().x, j*this->wallTexture.getSize().x);
+			window->draw(this->sprite[map[i][j]-1]);
+		}
 	}
 
 	window->display();

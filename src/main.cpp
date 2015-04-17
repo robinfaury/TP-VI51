@@ -2,7 +2,7 @@
 
 int main(int argc, char* argv[]) 
 {
-	Simulator simulatorOfLemming(100);
+	Simulator simulatorOfLemming(1);
 	simulatorOfLemming.CreateWorld();
 	simulatorOfLemming.Run();
 

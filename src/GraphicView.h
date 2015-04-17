@@ -13,6 +13,11 @@ private:
 	World* world;
 	std::vector<sf::CircleShape> bodyShape;
 
+	sf::Texture wallTexture;
+	sf::Texture pillTexture;
+	sf::Texture playerTexture;
+	std::vector<sf::Sprite> sprite;
+
 public:
 	GraphicView(void);
 

@@ -2,6 +2,7 @@
 #define BODY_H_
 
 #include <vector>
+#include <glm.hpp>
 
 #include "PhysicalObject.h"
 
@@ -9,12 +10,18 @@ class Body:  public PhysicalObject
 {
 private:
 	Body(void) {}
+	float dx;
+	float dy;
+	float velocity;
+	int*** map;
+	std::vector<glm::vec3> FoV;
 
 public:
 	Body(Semantic type);
 
-	std::vector<PhysicalObject*>* GetPerception();
-	void SetIntention(float dx, float dy, float velocity);
+	std::vector<glm::vec3>* GetPerception();
+	void SetInfluance(float dx, float dy, float velocity);
+	void GetInfluance(float *dx, float *dy, float *velocity);
 
 	virtual void SetPosition(float x, float y);
 	virtual void GetPosition(float &x, float &y);
@@ -22,6 +29,8 @@ public:
 	
 	virtual void SetSemantic(Semantic type);
 	virtual Semantic* GetSemantic();
+
+	void setMap(int*** map) {this->map = map;}
 
 	~Body(void);
 };

@@ -4,19 +4,38 @@
 Body::Body(Semantic type)
 {
 	this->type = type;
-	this->posX = rand()%800;
-	this->posY = rand()%800;
 }
 
-std::vector<PhysicalObject*>* Body::GetPerception()
+std::vector<glm::vec3>* Body::GetPerception()
 {
-	return NULL;
+	/*this->FoV.clear();
+	int x = this->posX;
+	while(--x <= 0 || *this->map[x][this->posY] != 1)
+		FoV.push_back(glm::vec3(x, this->posY, *this->map[x][this->posY]));
+	x = this->posX;
+	while(++x <= 0 || *this->map[x][this->posY] != 1)
+		FoV.push_back(glm::vec3(x, this->posY, *this->map[x][this->posY]));
+	int y = this->posY;
+	while(--y <= 0 || *this->map[this->posX][y] != 1)
+		FoV.push_back(glm::vec3(this->posX, y, *this->map[this->posX][y]));
+	y = this->posY;
+	while(++y <= 0 || *this->map[this->posX][y] != 1)
+		FoV.push_back(glm::vec3(this->posX, y, *this->map[this->posX][y]));*/
+	return &FoV;
 }
 
-void Body::SetIntention(float dx, float dy, float velocity)
+void Body::SetInfluance(float dx, float dy, float velocity)
 {
-	this->posX += dx * velocity;
-	this->posY += dy * velocity;
+	this->dx = dx;
+	this->dy = dy;
+	this->velocity = velocity;
+}
+
+void Body::GetInfluance(float *dx, float *dy, float *velocity)
+{
+	*dx = this->dx;
+	*dy = this->dy;
+	*velocity = this->velocity;
 }
 
 void Body::SetPosition(float x, float y)

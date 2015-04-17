@@ -4,17 +4,16 @@
 Simulator::Simulator(int numberOfAgents)
 {
 	this->numberOfAgents = numberOfAgents;
-	this->SFMLView.Init(800, 800);
+	this->SFMLView.Init(30*27, 30*30);
 }
 
 void Simulator::CreateWorld()
 {
-	for (int i=0; i<this->numberOfAgents; ++i)
-	{
-		Body* body = this->world.CreateBody();
-		this->agents.push_back(Agent(body));
-	}
+	this->world.CreateMap();
 
+	for (std::vector<Body*>::iterator currentBody = this->world.GetListOfBodys()->begin(); currentBody != this->world.GetListOfBodys()->end(); ++currentBody)
+		this->agents.push_back(Agent((*currentBody)));
+	
 	this->SFMLView.SetWorld(&this->world);
 }
 
@@ -37,10 +36,15 @@ void Simulator::Run()
 			}
 		);
 
+		this->world.CollecteInfluance();
+		this->world.ComputeCollision();
+		this->world.MoveBodys();
+
 		this->SFMLView.Draw();
 
 		end_time = std::chrono::high_resolution_clock::now();
 		std::cout <<"frame time : "<< std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count() << std::endl;
+		//std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
 }
 

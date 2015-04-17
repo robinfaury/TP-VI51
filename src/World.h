@@ -2,24 +2,41 @@
 #define WORLD_H_
 
 #include <vector>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <glm.hpp>
 
 #include "Body.h"
-#include "BasicAgent.h"
+#include "PacMan.h"
+
+enum {EMPTY, WALL, PILL, PLAYER};
 
 class World
 {
 private:
-	std::vector<PhysicalObject*> listOfPhysicalObjects;
+	int** map;
+	int height;
+	int width;
 	std::vector<Body*> listOfBodys;
+	std::vector<glm::vec3> listOfInfluances;
 
 public:
 	World(void);
 
-	Body* CreateBody();
-	void CreateWall();
+	void CreateMap();
+	void loadLevel();
+	Body* CreateBody(int x, int y);
 
-	std::vector<PhysicalObject*>* GetListOfPhysicalObjects();
+	void CollecteInfluance();
+	void ComputeCollision();
+	void MoveBodys();
+
+	int** GetMap();
 	std::vector<Body*>* GetListOfBodys();
+
+	int getHeight() {return this->height;}
+	int getWidth() {return this->width;}
 
 	~World(void);
 };

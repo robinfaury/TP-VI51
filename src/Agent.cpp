@@ -8,9 +8,26 @@ Agent::Agent(Body* body)
 
 void Agent::Life()
 {
-	std::vector<PhysicalObject*>* listOf = this->body->GetPerception();
+	std::vector<glm::vec3>* FoV = this->body->GetPerception();
 
-	this->body->SetIntention(rand()%5-2, rand()%5-2, 1);
+	
+	switch(rand()%5)
+	{
+	case 0:
+		this->body->SetInfluance(-1, 0, 1);
+		break;
+	case 1:
+		this->body->SetInfluance(0, -1, 1);
+		break;
+	case 2:
+		this->body->SetInfluance(1, 0, 1);
+		break;
+	case 3:
+		this->body->SetInfluance(0, 1, 1);
+		break;
+	default:
+		this->body->SetInfluance(0, 0, 0);
+	}
 }
 
 Agent::~Agent(void)
