@@ -6,21 +6,18 @@ Body::Body(Semantic type)
 	this->type = type;
 }
 
-std::vector<glm::vec3>* Body::GetPerception()
+std::vector<int>* Body::GetPerception()
 {
-	/*this->FoV.clear();
-	int x = this->posX;
-	while(--x <= 0 || *this->map[x][this->posY] != 1)
-		FoV.push_back(glm::vec3(x, this->posY, *this->map[x][this->posY]));
-	x = this->posX;
-	while(++x <= 0 || *this->map[x][this->posY] != 1)
-		FoV.push_back(glm::vec3(x, this->posY, *this->map[x][this->posY]));
-	int y = this->posY;
-	while(--y <= 0 || *this->map[this->posX][y] != 1)
-		FoV.push_back(glm::vec3(this->posX, y, *this->map[this->posX][y]));
-	y = this->posY;
-	while(++y <= 0 || *this->map[this->posX][y] != 1)
-		FoV.push_back(glm::vec3(this->posX, y, *this->map[this->posX][y]));*/
+	this->FoV.clear();
+	
+	FoV.push_back((*this->map)[this->posX-1][this->posY-1]);
+	FoV.push_back((*this->map)[this->posX][this->posY-1]);
+	FoV.push_back((*this->map)[this->posX+1][this->posY-1]);
+	FoV.push_back((*this->map)[this->posX-1][this->posY]);
+	FoV.push_back((*this->map)[this->posX+1][this->posY]);
+	FoV.push_back((*this->map)[this->posX-1][this->posY+1]);
+	FoV.push_back((*this->map)[this->posX][this->posY+1]);
+	FoV.push_back((*this->map)[this->posX+1][this->posY+1]);
 	return &FoV;
 }
 

@@ -3,6 +3,8 @@
 
 #include "Body.h"
 
+enum {EMPTY, WALL, PILL, PLAYER};
+
 class Agent
 {
 private:

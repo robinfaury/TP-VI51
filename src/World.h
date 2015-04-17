@@ -10,11 +10,10 @@
 #include "Body.h"
 #include "PacMan.h"
 
-enum {EMPTY, WALL, PILL, PLAYER};
-
 class World
 {
 private:
+	enum {EMPTY, WALL, PILL, PLAYER};
 	int** map;
 	int height;
 	int width;

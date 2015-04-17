@@ -14,12 +14,12 @@ private:
 	float dy;
 	float velocity;
 	int*** map;
-	std::vector<glm::vec3> FoV;
+	std::vector<int> FoV;
 
 public:
 	Body(Semantic type);
 
-	std::vector<glm::vec3>* GetPerception();
+	std::vector<int>* GetPerception();
 	void SetInfluance(float dx, float dy, float velocity);
 	void GetInfluance(float *dx, float *dy, float *velocity);
 

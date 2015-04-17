@@ -28,13 +28,8 @@ void Simulator::Run()
 
 		eventID = this->SFMLView.CheckEvent();
 
-		int nbAgents = static_cast<int>(agents.size());
-		tbb::parallel_for(0, nbAgents, 
-			[&](int i) 
-			{
-				this->agents[i].Life();
-			}
-		);
+		for (std::vector<Agent>::iterator currentAgent = this->agents.begin(); currentAgent != this->agents.end(); ++currentAgent)
+			(*currentAgent).Life();
 
 		this->world.CollecteInfluance();
 		this->world.ComputeCollision();
