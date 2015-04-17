@@ -5,7 +5,6 @@
 #include <thread>
 #include <chrono>
 #include <iostream>
-#include <tbb/tbb.h>
 
 #include "GraphicView.h"
 #include "Agent.h"
